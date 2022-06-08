@@ -15,7 +15,7 @@
          <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Columns</button>
          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
            <ng-container *ngFor="let col of columnsList">
-           <button ngbDropdownItem (click)="col.selected = !col.selected">{{col.name}}</button>
+           <button ngbDropdownItem class="mb-1"  [ngClass]="{'column-selected': col.selected}"  (click)="col.selected = !col.selected">{{col.name}}</button>
            </ng-container>
          </div>
        </div>

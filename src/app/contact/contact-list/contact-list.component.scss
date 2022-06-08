@@ -1,3 +1,7 @@
 :host{
   width: 100%;
 }
+.column-selected {
+  background-color: var(--bs-blue) !important;
+  color: white !important;
+}
