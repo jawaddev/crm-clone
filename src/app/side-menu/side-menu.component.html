@@ -1,0 +1,15 @@
+<div class="d-flex side-container scrollable">
+  <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills w-100 flex-nowrap" orientation="vertical">
+    <li ngbNavItem="list">
+      <a ngbNavLink routerLink="/contact/list">Contacts</a>
+    </li>
+    <li ngbNavItem="add">
+      <a ngbNavLink routerLink="/contact/add">Add Contact</a>
+    </li>
+    <li ngbNavItem="bottom">
+      <a ngbNavLink>Documents</a>
+    </li>
+  </ul>
+
+  <div [ngbNavOutlet]="nav" class="ms-4"></div>
+</div>

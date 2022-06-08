@@ -1,0 +1,122 @@
+
+<form [formGroup]="addContactForm" (submit)="submitForm()">
+    <p><ngb-progressbar [type]="progress.type" [textType]="progress.textType" [animated]="true" [value]="progress.value" [showValue]="true"></ngb-progressbar></p>
+    <div class="mb-3 col">
+      <label htmlFor="firstName">First Name <span class="text-danger">*</span></label>
+      <input
+        placeholder="First name" id="firstName" class="form-control" [ngClass]="{
+        'is-valid': addContactForm.get('firstName')?.valid,
+        'is-invalid': addContactForm.get('firstName')?.invalid && (addContactForm.get('firstName')?.dirty || addContactForm.get('firstName')?.touched)
+       }" type="text" formControlName="firstName">
+
+      <span class="description text-muted">
+        (This line is duplicated to have a big sentence) Please enter your first name Please enter your first name Please enter your first name Please enter your first name
+      </span>
+
+      <div *ngIf="addContactForm.get('firstName')?.invalid && (addContactForm.get('firstName')?.dirty || addContactForm.get('firstName')?.touched)">
+        <small class="form-text text-danger" *ngIf="addContactForm.get('firstName')?.errors?.['required']">
+          First Name is required.
+        </small>
+      </div>
+    </div>
+    <div class="mb-3 col">
+      <label htmlFor="familyName">Family Name <span class="text-danger">*</span></label>
+      <input  placeholder="Family name" id="familyName" class="form-control" type="text" formControlName="familyName" [ngClass]="{
+        'is-valid': addContactForm.get('familyName')?.valid,
+        'is-invalid': addContactForm.get('familyName')?.invalid && (addContactForm.get('familyName')?.dirty || addContactForm.get('familyName')?.touched)
+       }">
+
+      <span class="description text-muted">
+        Please enter your Family name
+      </span>
+
+      <div *ngIf="addContactForm.get('familyName')?.invalid && (addContactForm.get('familyName')?.dirty || addContactForm.get('familyName')?.touched)">
+        <small class="form-text text-danger" *ngIf="addContactForm.get('familyName')?.errors?.['required']">
+          Family Name is required.
+        </small>
+      </div>
+    </div>
+    <div class="mb-3 col">
+      <label htmlFor="email">Email <span class="text-danger">*</span></label>
+      <input  placeholder="Email" id="email" class="form-control" type="text" formControlName="email" [ngClass]="{
+        'is-valid': addContactForm.get('email')?.valid,
+        'is-invalid': addContactForm.get('email')?.invalid && (addContactForm.get('email')?.dirty || addContactForm.get('email')?.touched)
+       }">
+
+      <span class="description text-muted">
+        Please enter a valid email
+      </span>
+
+      <div *ngIf="addContactForm.get('email')?.invalid && (addContactForm.get('email')?.dirty || addContactForm.get('email')?.touched)">
+        <small class="form-text text-danger" *ngIf="addContactForm.get('email')?.errors?.['required']">
+          Email is required.
+        </small>
+        <div class="form-text text-danger" *ngIf="addContactForm.get('email')?.errors?.['email']">
+          Email format wrong.
+        </div>
+      </div>
+    </div>
+    <div class=" mb-3 col">
+      <label htmlFor="age">Age <span class="text-danger">*</span></label>
+      <input placeholder="Age" id="age" class="form-control is-invalid" type="number" formControlName="age" [ngClass]="{
+        'is-valid': addContactForm.get('age')?.valid,
+        'is-invalid': addContactForm.get('age')?.invalid && (addContactForm.get('age')?.dirty || addContactForm.get('age')?.touched)
+       }">
+
+      <span class="description text-muted">
+        Age should be between 18-120.
+      </span>
+
+      <div *ngIf="addContactForm.get('age')?.invalid && (addContactForm.get('firstName')?.dirty || addContactForm.get('age')?.touched)">
+        <div class="form-text text-danger" *ngIf="addContactForm.get('age')?.errors?.['min']">
+          age should be more than 18
+        </div>
+
+        <div class="form-text text-danger" *ngIf="addContactForm.get('age')?.errors?.['max']">
+          age should be less 120
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3 col">
+      <label htmlFor="monthlyIncome">Monthly income <span class="text-danger">*</span></label>
+      <input placeholder="Monthly income" id="monthlyIncome" class="form-control is-valid" type="number" formControlName="monthlyIncome" [ngClass]="{
+        'is-valid': addContactForm.get('monthlyIncome')?.valid,
+        'is-invalid': addContactForm.get('monthlyIncome')?.invalid && (addContactForm.get('monthlyIncome')?.dirty || addContactForm.get('monthlyIncome')?.touched)
+       }">
+
+      <span class="description text-muted">
+        Monthly income shoul dbe more than 1000.
+      </span>
+
+      <div class="form-text text-danger" *ngIf="addContactForm.get('monthlyIncome')?.errors?.['min']">
+        Income should be more than 1000
+      </div>
+    </div>
+
+  <div class="mb-3 row">
+    <label>Status <span class="text-danger">*</span></label>
+
+    <div class="btn-group" role="group" aria-label="Radio Buttons with Bootstrap 5">
+      <input type="radio" formControlName="status" [value]="1" class="btn-check" id="btnradio1" autocomplete="off">
+      <label class="btn btn-outline-primary" for="btnradio1">Single</label>
+
+      <input type="radio" formControlName="status" [value]="2" class="btn-check" id="btnradio2" autocomplete="off">
+      <label class="btn btn-outline-primary" for="btnradio2">Married</label>
+    </div>
+  </div>
+
+    <div class="mb-3 col" *ngIf="addContactForm.get('status')?.value === 2">
+      <label htmlFor="numberOfChildren">Number of Children <span class="text-muted">(Optional)</span></label>
+      <input placeholder="Number of Children" formControlName="numberOfChildren" class="form-control" type="number" >
+    </div>
+  <ngb-alert *ngIf="isSubmitted" type="success" (closed)="close()">Form Submitted successfully.</ngb-alert>
+  <div class="pb-3 col">
+    <button class="btn btn-primary position-relative" type="submit" [disabled]="!addContactForm.valid || isLoading">
+      {{isLoading ? 'Submitting' : 'Submit form'}}
+    </button>
+  </div>
+
+  </form>
+
+

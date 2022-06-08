@@ -1,0 +1,8 @@
+.side-container {
+  width: 200px;
+  height: calc(100vh - 72px);
+
+  @media (max-width: 969px) {
+    width: 150px;
+  }
+}
